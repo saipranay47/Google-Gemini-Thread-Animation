@@ -65,9 +65,8 @@ const ThreadAnimation = () => {
               src={bgimg}
               alt="Line background"
               loading="lazy"
-              width="1500"
               height="500"
-              className="absolute top-1/2 md:left-0 -left-[150px] -translate-y-1/2"
+              className="absolute top-1/2 left-0 -translate-y-1/2 w-full"
             />
           </div>
         </div>
