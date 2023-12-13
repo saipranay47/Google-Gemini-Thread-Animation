@@ -1,6 +1,7 @@
 import React from "react";
 import bgimg from "../assets/StartBuilding_001_BG.png";
 import animationData from "../assets/StartBuilding_001.json";
+import Lottie from "lottie-react";
 
 const ThreadAnimation = () => {
   return (
@@ -8,6 +9,7 @@ const ThreadAnimation = () => {
       <div className="flex justify-center items-center font-gsd h-screen sticky top-0 left-0 w-full">
         <div className=" absolute inset-0 w-full h-screen overflow-hidden mt-[140px] sm:mt-[90px] md:mt-[108px]">
           <div className="w-calc-100plus300 md:w-full max-w-[initial] h-auto ">
+            <Lottie animationData={animationData} loop={true} style={{position : "absolute", top:"50%", transform:"translate3d(0,-50%,0)"}}  />
             <img
               src={bgimg}
               alt="Line background"
