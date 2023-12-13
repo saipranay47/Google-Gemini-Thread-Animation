@@ -4,6 +4,7 @@
 
 This project demonstrates a reverse-engineered version of the Google Gemini thread animation, built with React.js, Tailwind CSS, and lottiefiles.
 
+![preview](./image.png)
 
 ### Technologies
 
