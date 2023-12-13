@@ -1,15 +1,66 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import bgimg from "../assets/StartBuilding_001_BG.png";
 import animationData from "../assets/StartBuilding_001.json";
-import Lottie from "lottie-react";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 const ThreadAnimation = () => {
+  const lottieRef = useRef(null);
+
+  useEffect(() => {
+    let isScrolling;
+    let lastScrollTop = 0;
+
+    const handleScrollStart = () => {
+      lottieRef.current.play();
+    };
+
+    const handleScrollEnd = () => {
+      clearTimeout(isScrolling);
+      isScrolling = setTimeout(() => {
+        lottieRef.current.pause();
+      }, 150);
+    };
+
+    const handleScroll = () => {
+      const st = window.scrollY || document.documentElement.scrollTop;
+      const speed = Math.abs(st - lastScrollTop);
+      const animationSpeed = (speed / 200) * 6.66;
+
+      const direction = st > lastScrollTop ? 1 : -1;
+
+      lottieRef.current.setPlayerSpeed(animationSpeed);
+      lottieRef.current.setPlayerDirection(direction);
+
+      lastScrollTop = st;
+    };
+
+    window.addEventListener("scroll", handleScrollStart);
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScrollEnd);
+
+    return () => {
+      window.removeEventListener("scroll", handleScrollStart);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleScrollEnd);
+    };
+  }, []);
+
   return (
-    <div className="relative block w-full h-[300vh]">
+    <div className="relative block w-full h-[600vh]">
       <div className="flex justify-center items-center font-gsd h-screen sticky top-0 left-0 w-full">
         <div className=" absolute inset-0 w-full h-screen overflow-hidden mt-[140px] sm:mt-[90px] md:mt-[108px]">
           <div className="w-calc-100plus300 md:w-full max-w-[initial] h-auto ">
-            <Lottie animationData={animationData} loop={true} style={{position : "absolute", top:"50%", transform:"translate3d(0,-50%,0)"}}  />
+            <Player
+              ref={lottieRef}
+              src={animationData}
+              style={{
+                position: "absolute",
+                top: "50%",
+                transform: "translate3d(0,-50%,0)",
+              }}
+              speed={1}
+              loop
+            ></Player>
             <img
               src={bgimg}
               alt="Line background"
